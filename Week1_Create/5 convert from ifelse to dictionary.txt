@@ -1,30 +1,4 @@
-from django.http import HttpResponse, HttpResponseNotFound
-# Create your views here.
-
-monthly_challenges_dict = {
-    "jan": "January Challenge d",
-    "feb": "February Challenge d",
-    "mar": "March Challenge d",
-    "apr": "April Challenge",
-    "may": "May Challenge",
-    "jun": "June Challenge",
-    "jul": "July Challenge",
-    "aug": "August Challenge",
-    "sep": "September Challenge",
-    "oct": "October Challenge",
-    "nov": "November Challenge",
-    "dec": "December Challenge"
-}
-
-def monthly_challenges_dict_view(request, month):
-    try:
-        challenges_text = monthly_challenges_dict[month]
-        return HttpResponse(challenges_text)
-    except:
-        return HttpResponseNotFound("This month is not supported")
-
-def monthly_challenges_response_number(request, month):
-    return HttpResponse(month)
+1- if else make more line 
 
 def monthly_challenges(request, month):
     challenge_text = None
@@ -55,3 +29,40 @@ def monthly_challenges(request, month):
     else:
         return HttpResponseNotFound("This month is not supported")
     return HttpResponse(challenge_text)
+
+
+
+2- dictionary 
+
+monthly_challenges_dict = {
+    "jan": "January Challenge d",
+    "feb": "February Challenge d",
+    "mar": "March Challenge d",
+    "apr": "April Challenge",
+    "may": "May Challenge",
+    "jun": "June Challenge",
+    "jul": "July Challenge",
+    "aug": "August Challenge",
+    "sep": "September Challenge",
+    "oct": "October Challenge",
+    "nov": "November Challenge",
+    "dec": "December Challenge"
+}
+
+def monthly_challenges_dict_view(request, month):
+    try:
+        challenges_text = monthly_challenges_dict[month]
+        return HttpResponse(challenges_text)
+    except:
+        return HttpResponseNotFound("This month is not supported")
+
+
+
+
+
+
+
+
+
+
+
