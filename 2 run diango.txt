@@ -1,0 +1,12 @@
+1- run web application 
+
+>> python manage.py runserver
+
+2- Create Project 
+
+>> django-admin startproject mypage
+
+3- Create App inside the project 
+
+>> python manage.py startapp challenges
+

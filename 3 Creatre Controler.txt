@@ -1,0 +1,78 @@
+- The controller need Function or Class to return the response 
+
+1- Create App
+
+>> python manage.py startapp challenges
+
+2- inside the challenges folder write function in the views.py 
+
+from django.shortcuts import render
+from django.http import HttpResponse
+# Create your views here.
+
+def index(request):
+    return HttpResponse("This Working!")
+
+
+- HttpResponse is that we want to return it is from Django.http 
+
+3- Create urls.py in the challenges app
+
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path("january", views.index)
+]
+
+
+--  path("january", views.index) : is what we user our router, the path need two parameter : rout and view 
+
+4- in the main project we add our routs 
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('challenges/',include('challenges.urls'))
+]
+
+-- path('challenges/',include('challenges.urls')) ==> this is our rout to the app 
+
+5- Run server 
+
+>> python manage.py runserver
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
