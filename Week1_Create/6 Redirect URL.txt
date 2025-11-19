@@ -1,0 +1,90 @@
+** we want when they use the URL : challenges/1 ==> challenges/jan **
+
+1. what we have is the dictionary 
+
+monthly_challenges_dict = {
+    "jan": "January Challenge d",
+    "feb": "February Challenge d",
+    "mar": "March Challenge d",
+    "apr": "April Challenge",
+    "may": "May Challenge",
+    "jun": "June Challenge",
+    "jul": "July Challenge",
+    "aug": "August Challenge",
+    "sep": "September Challenge",
+    "oct": "October Challenge",
+    "nov": "November Challenge",
+    "dec": "December Challenge"
+}
+
+>> months1 = monthly_challenges_dict.keys() = monthly_challenges_dict.key()
+>>print(months1)
+>>print(type(months1))
+
+-Result : 
+
+dict_keys(['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'])
+<class 'dict_keys'>
+
+-We want convert the months1 to list 
+
+>>months1 = list(monthly_challenges_dict.keys())
+
+['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec']
+<class 'list'>
+
+- now we can access to the index of the list 
+
+>> listIndex = months1[0]
+
+==> jan
+
+2- Redirect URL 
+
+def monthly_challenges_response_number(request, month):
+    months = list(monthly_challenges_dict.keys())
+
+    if month > len(months):
+        return HttpResponseNotFound("This month is not supported")
+    
+    redirect_month = months[month-1]
+    return HttpResponseRedirect("/challenges/" + redirect_month)  
+
+
++ Testing with URL : 
+
+-http://127.0.0.1:8000/challenges/1 ==> Redirect to http://127.0.0.1:8000/challenges/jan
+
++ Console :
+
+[17/Nov/2025 20:59:12] "GET /challenges/1 HTTP/1.1" 302 0
+[17/Nov/2025 20:59:12] "GET /challenges/jan HTTP/1.1" 200 19
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
