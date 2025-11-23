@@ -1,0 +1,25 @@
+1-urls.py
+
+urlpatterns = [
+    path("",views.index), # Empty path : /challenges/
+]
+
+2-views.py
+
+def index(request):
+    #convert from dict to list
+    list_items = ""
+    #want to get "jan", "feb" etc from the dict keys
+
+    months = list(monthly_challenges_dict.keys())
+
+
+    for month in months:
+        captialized_month = month.capitalize()
+        month_path = reverse("month-challenge", args=[month])
+        list_items += f"<li><a href=\"{month_path}\">{captialized_month}</a></li>"
+
+    respond_data = f"<ul>{list_items}</ul>"
+    return HttpResponse(respond_data)
+
+>> http://127.0.0.1:8000/challenges/

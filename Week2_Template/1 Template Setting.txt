@@ -1,0 +1,144 @@
+In the app: views.py 
+
+- we use render to string to convert from html element to string 
+
+template.html convert to string ==> f"<li><a href=\"{month_path}\">{captialized_month}</a></li>" 
+
+----------------------------------------------------------------------
+
+from django.template.loader import render_to_string
+
+
+def monthly_challenges_dict_view(request, month):
+    try:
+        challenges_text = monthly_challenges_dict[month]
+        respond_data = render_to_string("challenges/challenge.html")
+        return HttpResponse(respond_data)
+    except:
+        return HttpResponseNotFound("<h1>This month is not supported</h1>")
+
+** Must Remember : request mean what you received ** 
+
+
+1- Create folder template 
+
+inside the app : ex, challengs app
+
+>> crate folder template >> challengs >> challeng.html 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monthly Challenges</title>
+</head>
+<body>
+    <h1>This Month's Challenges</h1>
+    <h2>Go for a walk for at least 20 minutes every day!</h2>
+</body>
+</html>
+
+
+2- in the main project setting 
+
+There are way to add template 
+
+2-1 setting : Auto just add our app to the make project scan 
+
+# Application definition
+
+INSTALLED_APPS = [
+    'challenges',  // what we add 
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+]
+
+it working because of :
+
+TEMPLATES = [
+    {
+
+  'APP_DIRS': True,
+
+]
+
+------------------------------------------------------------------------
+
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+this Base_dir is what python setup for us we know need to 
+
+2-2 add 
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+            BASE_DIR / "challenges" / "templates"
+        ],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+
+
+-----------------------------------------------------
+
+Final return template.html
+
+-------------------------------------------------- 
+
+
+from django.shortcuts import render
+
+
+def monthly_challenges_dict_view(request, month):
+    try:
+        challenges_text = monthly_challenges_dict[month]
+
+        return render(request, "challenges/challenge.html")
+        # respond_data = render_to_string("challenges/challenge.html")
+        # return HttpResponse(respond_data)
+    except:
+        return HttpResponseNotFound("<h1>This month is not supported</h1>")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

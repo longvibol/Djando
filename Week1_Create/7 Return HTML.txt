@@ -1,0 +1,20 @@
+1-ursl.py
+
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path("<str:month>", views.monthly_challenges_dict_view)
+]
+
+
+
+2-In views.py
+
+def monthly_challenges_dict_view(request, month):
+    try:
+        challenges_text = monthly_challenges_dict[month]
+        respond_data = f"<h1>{challenges_text}</h1>"
+        return HttpResponse(respond_data)
+    except:
+        return HttpResponseNotFound("<h1>This month is not supported</h1>")
