@@ -6,15 +6,15 @@ from django.template.loader import render_to_string
 # Create your views here.
 
 monthly_challenges_dict = {
-    "jan": "January Challenge d",
+    "jan": "January is LONG Braly Birthday at 16th",
     "feb": "February Challenge d",
     "mar": "March Challenge d",
     "apr": "April Challenge",
     "may": "May Challenge",
-    "jun": "June Challenge",
+    "jun": "June Birthday LONG Buncheeng 31st",
     "jul": "July Challenge",
     "aug": "August Challenge",
-    "sep": "September Challenge",
+    "sep": "September Mummy Birthday at 09th",
     "oct": "October Challenge",
     "nov": "November Challenge",
     "dec": None
