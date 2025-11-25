@@ -1,0 +1,136 @@
+1- Create our template 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block page_title %} My Challenges {% endblock %}</title>
+</head>
+<body>
+    {% block content %}
+
+    {% endblock %}
+</body>
+</html>
+
+2- extend the html to the template 
+
+first we need to put the header : {% extends "base.html" %}
+
+then we can inject the from the template: 
+
+------------------------------------------------
+
+{% extends "base.html" %}
+
+All Challenges
+
+    <ul>
+      {% for month in months %}
+        {% comment %} <li><a href="/challenges/{{month}}">{{ month | title}}</a></li> {% endcomment %}
+        <li><a href="{% url "month-challenge" month %}">{{ month | title}}</a></li>
+      {% endfor %}
+    </ul>
+
+------------------------------------------------
+
+Then we can update to : 
+
+-------------------------- challenges.html 
+
+{% extends "base.html" %}
+
+{%block month_name%}
+
+ Monthly Challenges
+
+{%endblock%}
+
+{% block content %}
+    <h1>{{ month_name | title }} Challenges</h1>
+    {% if text is not None %}
+        <h2>{{text | title}}</h2>
+    {% else %}
+        <p>There is no challenge for this month yet!</p>
+    {% endif %}
+
+{%endblock%}
+
+
+------------------------------------------------------------------
+
+Note: what we want to inject we can us the tag : 
+
+{%block month_name%}
+
+ Monthly Challenges
+
+{%endblock%}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

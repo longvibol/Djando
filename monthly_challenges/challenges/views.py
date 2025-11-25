@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
 from django.urls import reverse
 from django.template.loader import render_to_string
+
 # Create your views here.
 
 monthly_challenges_dict = {
@@ -35,8 +36,8 @@ def monthly_challenges_dict_view(request, month):
             "month_name" : month.capitalize()
         })
     except:
-        return HttpResponseNotFound("<h1>This month is not supported</h1>")
-    
+        response_data = render_to_string("404.html")
+        return HttpResponseNotFound(response_data)    
 
 
 def monthly_challenges_response_number(request, month):
