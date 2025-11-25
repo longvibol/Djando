@@ -16,35 +16,28 @@ monthly_challenges_dict = {
     "sep": "September Challenge",
     "oct": "October Challenge",
     "nov": "November Challenge",
-    "dec": "December Challenge"
+    "dec": None
 }
 
-def index(request):
-    #convert from dict to list
+def index(request):   
     list_items = ""
-    #want to get "jan", "feb" etc from the dict keys
-
     months = list(monthly_challenges_dict.keys())
-
-
-    for month in months:
-        captialized_month = month.capitalize()
-        month_path = reverse("month-challenge", args=[month])
-        list_items += f"<li><a href=\"{month_path}\">{captialized_month}</a></li>"
-
-    respond_data = f"<ul>{list_items}</ul>"
-    return HttpResponse(respond_data)
+    return render(request, "challenges/index.html",{
+        "months" : months
+    })
 
 
 def monthly_challenges_dict_view(request, month):
     try:
         challenges_text = monthly_challenges_dict[month]
-
-        return render(request, "challenges/challenge.html")
-        # respond_data = render_to_string("challenges/challenge.html")
-        # return HttpResponse(respond_data)
+        return render(request, "challenges/challenge.html",{
+            "text" : challenges_text,
+            "month_name" : month.capitalize()
+        })
     except:
         return HttpResponseNotFound("<h1>This month is not supported</h1>")
+    
+
 
 def monthly_challenges_response_number(request, month):
     months = list(monthly_challenges_dict.keys())
@@ -60,9 +53,6 @@ months = list(monthly_challenges_dict.keys())
 months1 = list(monthly_challenges_dict.keys())
 for i in range(len(months)):
     forward_month = months[i]
-    # print(forward_month)
-# print(type(forwar_month))
-
 print(months1[0])
 print(type(months1))
 
