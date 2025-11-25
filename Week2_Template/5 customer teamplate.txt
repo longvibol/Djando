@@ -1,0 +1,107 @@
+If we use the template from the root, it will effect to all the app
+
+- this take noted we want to put only inside the App
+
+It mean we can crate another folder name it like : include, share, partition 
+
+
+1- inside challenges folder then challenge we create folder name :include 
+
+and new file include.html 
+
+<header>
+    <nav>
+        <a href="{% url "index" %}"> All Challenges header</a>
+    </nav>
+</header>
+
+
+2- urls.py 
+
+ path("",views.index, name="index"), # We name it index to make it related to the name 
+
+3- inside the html file we can add the new tag with include component 
+
+ {% include "challenges/include/header.html" %}
+
+==> challenge.html 
+
+{% extends "base.html" %}
+
+{%block month_name%}
+
+Monthly Challenges
+
+{%endblock%}
+
+{% block content %}
+    {% include "challenges/include/header.html" %}
+    <h1>{{ month_name | title }} Challenges</h1>
+    {% if text is not None %}
+        <h2>{{text | title}}</h2>
+    {% else %}
+        <p>There is no challenge for this month yet!</p>
+    {% endif %}
+
+{%endblock%}
+
+
+then we can update the header to the name : <a href="{% url "index" %}"> All Challenges header</a>
+
+
+Note: 
+
+the parameter from the views.py also can using customer display by each page 
+
+- in the challeng.html 
+
+ {% include "challenges/include/header.html" with active_page="challenge" %}
+
+Explain : with active_page="challenge" : this the parameter that we can display in each header by ourselves 
+
+in the header.html 
+
+---------------------------
+<header>
+    <nav>
+        <a href="{% url "index" %}"> All Challenges header</a>
+    </nav>
+
+    {% comment %} {{month_name}} {% endcomment %}
+</header>
+
+{{active_page}} # this is what we add to display customer by the html 
+
+-----------------------
+
+
+So when it view on the challeng.html it will show challeng and in the index 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

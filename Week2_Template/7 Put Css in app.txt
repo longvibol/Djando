@@ -1,0 +1,83 @@
+1- Create css file 
+
+in the app we create folder name : static >> challengs (the same app name) >> challenges.css
+
+ul {
+    list-style: none;
+}
+
+2- how to add the css to the html file 
+
+in the base.html teample we add the css to each html:
+
+-------------------------- basc.html
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block page_title %} My Challenges {% endblock %}</title>
+    {% block css_files %}{% endblock%}  # this is what we have, normalty in the header to load css
+</head>
+<body>
+    {% block content %}{% endblock %}
+</body>
+</html>
+
+-------------------------------------------------------
+
+in the template : index.html we want to load the css then can use in this template :
+
+
+{% load static %} 
+{% comment %} plugin  {% endcomment %}
+
+{% block css_files%}
+  <link rel="stylesheet" href="{% static "challenges/challenges.css" %}"> # where we put the url of the css file 
+{% endblock%}
+
+----------------------------------------------------------
+
+{% extends "base.html" %}
+{% load static %} 
+{% comment %} plugin  {% endcomment %}
+
+{% block css_files%}
+  <link rel="stylesheet" href="{% static "challenges/challenges.css" %}">
+{% endblock%}
+
+{% block page_title %}
+  All Challenges
+{% endblock %}
+
+{% block content %}
+  {% include "challenges/include/header.html" %}
+    <ul>
+      {% for month in months %}
+        <li><a href="{% url 'month-challenge' month %}">{{ month|title }}</a></li>
+      {% endfor %}
+    </ul>
+{% endblock %}
+
+
+-------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,138 @@
+1-views.py 
+
+def index(request):   
+    list_items = ""
+    months = list(monthly_challenges_dict.keys())
+    return render(request, "challenges/index.html",{
+        "months" : months
+    })
+
+
+2- urls.py
+
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path("",views.index), # Empty path : /challenges/
+    path("<int:month>", views.monthly_challenges_response_number),
+    path("<str:month>", views.monthly_challenges_dict_view, name="month-challenge"),
+]
+
+3- index.html 
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>All Challenges</title>
+  </head>
+  <body>
+    <ul>
+      {% for month in months %}
+        <li><a href="/challenges/{{month}}">{{ month | title}}</a></li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>
+
+----------------------------------------------------
+
+This is what we are looping with for: 
+
+<body>
+    <ul>
+      {% for month in months %}
+        <li><a href="/challenges/{{month}}">{{ month | title}}</a></li>
+      {% endfor %}
+    </ul>
+  </body>
+
+
+យើងឃើញថាបើយើងដាក់ href="/challenges/{{month}}"> វាជា Hard coding ពេលដែលមានការផ្លាស់ប្តូរ url យើងពិបាកមកកែវាវិញ
+
+
+url is the same as revers in the python but we use the url template to do looping 
+
+Therefore we can update with url :
+
+<li><a href="/challenges/{{month}}">{{ month | title}}</a></li>
+
+==> 
+
+<li><a href="{% url "month-challenge" month %}">{{ month | title}}</a></li>
+
+
+Explain : 
+
+- "month-challenge" is the name from :path("<str:month>", views.monthly_challenges_dict_view, name="month-challenge"),
+- month is the argument
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

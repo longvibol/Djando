@@ -1,0 +1,65 @@
+1- create environment : we want to install the package only inside the project 
+
+>> python -m venv myvenv
+
+2- run venv : terminal 
+
+>> myvenv\Scripts\activate.bat
+
+or run venv : in the gitbash 
+
+>> source myvenv/Scripts/activate
+
+3- install django 
+
+>> pip install django
+
+4- Create project 
+
+>> Django-admin startproject my_project
+
+5- run webserver 
+
+>> cd my_project 
+>> python manage.py runserver 
+
+or 
+
+Specific the port : 8080
+
+>> python manage.py runserver 8080
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

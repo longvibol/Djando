@@ -1,0 +1,132 @@
+1- Crate page 404.html to handle in the root template 
+
+{% block page_title%} Something went wrong - We could not find that page! {%endblock%}
+
+{% block content %}
+<h1> We could not found that page!</h1>
+<p>Sorry, but we could not find a matching page!</p>
+{% endblock%}
+
+
+2- in the views.py
+
+from django.template.loader import render_to_string
+
+def monthly_challenges_dict_view(request, month):
+    try:
+        challenges_text = monthly_challenges_dict[month]
+        return render(request, "challenges/challenge.html",{
+            "text" : challenges_text,
+            "month_name" : month.capitalize()
+        })
+    except:
+        response_data = render_to_string("404.html")
+        return HttpResponseNotFound(response_data)
+
+-----------------------------------------------------------------------
+
+In best practice in the Django they already but for the page not found 
+
+from django.http import Http404
+
+def monthly_challenges_dict_view(request, month):
+    try:
+        challenges_text = monthly_challenges_dict[month]
+        return render(request, "challenges/challenge.html",{
+            "text" : challenges_text,
+            "month_name" : month.capitalize()
+        })
+    except:
+        raise Http404   # this is what we add so the djaon will search for that file and we must put the same name 404.html
+
+Then in the main project setting :
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = True ==> change to False 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

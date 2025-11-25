@@ -1,0 +1,87 @@
+When we want to redirect the condition, we can use the if condition template when it fail back:
+
+Ex: 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> {{ month_name }} Monthly Challenges</title>
+</head>
+<body>
+    <h1>{{ month_name | title }} Challenges</h1>
+    {% if text is not None %}
+        <h2>{{text | title}}</h2>
+    {% else %}
+        <p>There is no challenge for this month yet!</p>
+    {% endif %}
+</body>
+</html>
+
+-----------------------------------------------------------------------------------
+
+We check the condition from the "text" that is provide from the views.py 
+
+
+monthly_challenges_dict = {
+    "jan": "January Challenge d",
+    "feb": "February Challenge d",
+    "mar": "March Challenge d",
+    "apr": "April Challenge",
+    "may": "May Challenge",
+    "jun": "June Challenge",
+    "jul": "July Challenge",
+    "aug": "August Challenge",
+    "sep": "September Challenge",
+    "oct": "October Challenge",
+    "nov": "November Challenge",
+    "dec": None
+}
+
+
+Then the "text" is None it will be redirect to 
+
+<body>
+    <h1>{{ month_name | title }} Challenges</h1>
+    {% if text is not None %}
+        <h2>{{text | title}}</h2>
+    {% else %}
+        <p>There is no challenge for this month yet!</p>
+    {% endif %}
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,4 +1,8 @@
+from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
+from django.urls import reverse
+from django.template.loader import render_to_string
+
 # Create your views here.
 
 monthly_challenges_dict = {
@@ -13,15 +17,28 @@ monthly_challenges_dict = {
     "sep": "September Challenge",
     "oct": "October Challenge",
     "nov": "November Challenge",
-    "dec": "December Challenge"
+    "dec": None
 }
+
+def index(request):   
+    list_items = ""
+    months = list(monthly_challenges_dict.keys())
+    return render(request, "challenges/index.html",{
+        "months" : months
+    })
+
 
 def monthly_challenges_dict_view(request, month):
     try:
         challenges_text = monthly_challenges_dict[month]
-        return HttpResponse(challenges_text)
+        return render(request, "challenges/challenge.html",{
+            "text" : challenges_text,
+            "month_name" : month.capitalize()
+        })
     except:
-        return HttpResponseNotFound("This month is not supported")
+        response_data = render_to_string("404.html")
+        return HttpResponseNotFound(response_data)    
+
 
 def monthly_challenges_response_number(request, month):
     months = list(monthly_challenges_dict.keys())
@@ -37,9 +54,6 @@ months = list(monthly_challenges_dict.keys())
 months1 = list(monthly_challenges_dict.keys())
 for i in range(len(months)):
     forward_month = months[i]
-    # print(forward_month)
-# print(type(forwar_month))
-
 print(months1[0])
 print(type(months1))
 
