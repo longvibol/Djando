@@ -1,0 +1,27 @@
+We use tag :%url%
+
+1-HTML : 
+
+
+<header id="main-navigation">
+      <h1><a href=" {% url "starting-page" %}">Vibol' Blog</a></h1>
+      <nav>
+        <a href="">All Posts</a>
+      </nav>
+</header>
+
+
+2-urls.py
+
+urlpatterns = [
+    path("", views.starting_page, name="starting-page"),
+    path("posts", views.posts, name="posts-page"),
+    path("post/<str:slug>", views.post_detail, name="post-detail-page"),
+]
+
+
+-----------------------
+
+
+We route them by putting the name in the urls 
+

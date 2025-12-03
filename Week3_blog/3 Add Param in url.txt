@@ -1,0 +1,12 @@
+urlpatterns = [
+    path("post/<str:slug>", views.post_detail, name="post-detail-page"),
+]
+
+
++ want to the own parameter => http://localhost/post/parameter 
+
+in the html link: 
+
+<a href="{%url "post-detail-page" slug='the-mountains'%}">
+
+==> http://127.0.0.1:8000/post/the-mountains

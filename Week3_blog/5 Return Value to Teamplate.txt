@@ -1,0 +1,8 @@
+def posts(request):
+    return render(request, "blog/all-posts.html",{
+        "all_posts" : all_posts
+    })
+
+សម្រាប់ function នឹងមានន័យថា យកបេះតម្លៃដែលមាននៅក្នុង dictionary ទៅអោយ Teamplate 
+ចឹងនៅក្នុង Teamplate យើងអាចចាប់តម្លៃនឹងមកប្រើបាន
+

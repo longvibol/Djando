@@ -1,0 +1,6 @@
+https://docs.djangoproject.com/en/5.2/ref/templates/builtins/#date
+
+
+in the template:
+
+<div>Last updated on <time>{{post.date|date:"d M Y"}}</time></div>
