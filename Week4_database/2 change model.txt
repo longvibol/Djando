@@ -1,0 +1,59 @@
+1- Model 
+
+from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
+
+class Book(models.Model):
+    title = models.CharField(max_length=50)
+    rating = models.IntegerField(validators=[MinValueValidator(1),MaxValueValidator(5)])
+    author = models.CharField(null=True, max_length=100)
+    is_bestselling = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.title} ({self.rating})"
+
+2- shell
+
+>> python .\manage.py makemigrations
+
+
+Please select a fix:
+ 1) Provide a one-off default now (will be set on all existing rows with a null value for this column)
+ 2) Quit and manually define a default value in models.py.
+
+In case our existing data are not update we need to assign the default value to it 
+
+>> 
+
+author = models.CharField(null=True, max_length=100)
+is_bestselling = models.BooleanField(default=False)
+
+>> python .\manage.py shell
+
+how to access individual field : 
+
+>>> from book_outlet.models import Book
+>>> Book.objects.all()
+<QuerySet [<Book: Harry Potter 1- The Philosopher's Stone (5)>, <Book: Lord of the Rings (4)>]>
+>>> Book.objects.all()[1]
+<Book: Lord of the Rings (4)>
+
+
+or 
+
+>>> Book.objects.all()[1].is_bestselling
+False
+
+
+
+
+
+
+
+
+
+
+
+
+
+

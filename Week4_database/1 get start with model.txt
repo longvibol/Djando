@@ -1,0 +1,316 @@
+Model field document reference : 
+
+https://docs.djangoproject.com/en/6.0/ref/models/fields/
+
+--------------------------
+
+
+- in the app : model.py file is the our define our model Entity or blue print of the data object 
+-   
+
+
+1. Create model in the app : our Entity 
+
+----------------------Code
+
+from django.db import models
+
+# Create your models here.
+
+class Book(models.Model):
+    title = models.CharField(max_length=50)
+    rating = models.IntegerField() 
+
+--------------------
+
+==> in the project we need to add the our app to the setting : 
+
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'book_outlet'
+]
+
+
+2- Run Migration :
+
+>> python .\manage.py makemigrations
+
+Then it will create folder Migration for us 
+
+
+3- Update to the app what we are in migration :
+
+>> python .\manage.py migrate
+
+Operations to perform:
+  Apply all migrations: admin, auth, book_outlet, contenttypes, sessions
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying auth.0001_initial... OK
+  Applying admin.0001_initial... OK
+
+Within this line is it will migration to the project: 
+
+------------------------------------------------------------------------------------
+
+Process in the shell: 
+
+>> python .\manage.py shell
+
+>>> from book_outlet.models import Book
+
+- Create object from the model class: 
+
+>>> harry_potter = Book(title="Harry Potter 1- The Philosopher's Stone", rating=5)
+
+- Create object from the model Insert:
+
+>>> harry_potter.save()
+
+- Create object from the model class: 
+
+>>> lord_of_the_rings = Book(title="Lord of the Rings", rating=4)
+
+- Create object from the model Insert:
+
+>>> lord_of_the_rings.save()
+
+
+4-fetching data 
+
+>>>>> Book.objects.all()
+<QuerySet [<Book: Book object (1)>, <Book: Book object (2)>]>
+
+------------------------------------------------------------------------------------------------
+
+5- To string method in the class:
+
++ update in the model : 
+
+from django.db import models
+
+class Book(models.Model):
+    title = models.CharField(max_length=50)
+    rating = models.IntegerField(validators=[MinValueValidator(1),MaxValueValidator(5)])
+
+    def __str__(self):
+        return f"{self.title} ({self.rating})"
+
++ in the shell 
+
+>> python .\manage.py shell
+>>> from book_outlet.models import Book
+>>> Book.objects.all()
+<QuerySet [<Book: Harry Potter 1- The Philosopher's Stone (5)>, <Book: Lord of the Rings (4)>]>
+
+=================================================================
+
+Update the mode process : 
+
+Model:
+
+---------------------------------------
+
+from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
+
+class Book(models.Model):
+    title = models.CharField(max_length=50)
+    rating = models.IntegerField(validators=[MinValueValidator(1),MaxValueValidator(5)])
+    author = models.CharField(max_length=100)
+    is_bestselling = models.BooleanField()
+
+    def __str__(self):
+        return f"{self.title} ({self.rating})"
+
+
+---------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

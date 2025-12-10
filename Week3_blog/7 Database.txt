@@ -1,0 +1,4 @@
+1- Django Models
+
+in the python we use model to create the sql query 
+
