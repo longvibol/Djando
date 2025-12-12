@@ -1,0 +1,99 @@
+1. Create by python for the function return id 
+
+- In the our model we prepare to create that return the primary key 
+
+    def get_absolute_url(self):
+        return reverse("book-detail", args=[self.id])
+    
+
+----- whole code :
+
+from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
+from django.urls import reverse
+
+class Book(models.Model):
+    title = models.CharField(max_length=50)
+    rating = models.IntegerField(validators=[MinValueValidator(1),MaxValueValidator(5)])
+    author = models.CharField(null=True, max_length=100)
+    is_bestselling = models.BooleanField(default=False)
+
+    # get primary key from model
+
+    def get_absolute_url(self):
+        return reverse("book-detail", args=[self.id])
+    
+
+    def __str__(self):
+        return f"{self.title} ({self.rating})"
+
+
+------------------
+
+in the template that have the parameter return from url :
+
+
+<li><a href="{{ book.get_absolute_url }}">{{ book.title}} </a> (Ratting: {{ book.rating}})</li>
+
+or 
+
+<li><a href="{% url "book-detail" book.id %}">{{ book.title}} </a> (Ratting: {{ book.rating}})</li>
+
+-----------------------
+
+
+in the urls.py : 
+
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path("", views.index),
+    path("<int:id>", views.book_detail, name="book-detail")
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

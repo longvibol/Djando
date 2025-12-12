@@ -1,0 +1,134 @@
+what is Slug:
+
+- slug is a short, URL-friendly string used to identify a resource: 
+
+Example: "Hello World!" → "hello-world"
+
+or 
+
+Common use: building readable URLs like /blog/my-first-post/ instead of /blog/42/.
+
+Step by step to change from ID to slug : to url string :
+
+What we want in the return url: 
+
+" http://127.0.0.1:8000/my-story"
+
+1. in the model we update the slug 
+
+- Crete file slug in the model 
+
+    # Harry Potter 1 => harry-potter-1
+    slug = models.SlugField(default="", null=False, db_index=True)
+
+
+Create function save to convert from normal text to slug : My book ==> My-book 
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
+
+
+Whole code in the model: 
+
+from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
+from django.urls import reverse
+from django.utils.text import slugify
+
+class Book(models.Model):
+    title = models.CharField(max_length=50)
+    rating = models.IntegerField(validators=[MinValueValidator(1),MaxValueValidator(5)])
+    author = models.CharField(null=True, max_length=100)
+    is_bestselling = models.BooleanField(default=False)
+
+    # Harry Potter 1 => harry-potter-1
+    slug = models.SlugField(default="", null=False, db_index=True)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
+
+
+    # get primary key from model
+    def get_absolute_url(self):
+        # return reverse("book-detail", args=[self.id])
+        return reverse("book-detail", args=[self.slug])
+    
+
+    def __str__(self):
+        return f"{self.title} ({self.rating})"
+2- make migration to the data 
+
+because we update the model we need to migration it 
+
+>> python .\manage.py makemigrations
+>> python .\manage.py migrate 
+
+==> go to database 
+
+>> python .\manage.py shell 
+
+Update the title to slug :
+
+>> from book_outlet.models import Book
+
+>> Book.objects.get(title="Harry Potter 1").save()
+>>  Book.objects.get(title="Harry Potter 1").slug   
+  
+3 - update the views.py that return slug 
+
+
+def book_detail(request, slug):
+
+    book = get_object_or_404(Book, slug=slug)
+    return render(request, "book_outlet/book_detail.html",{
+        "title":book.title,
+        "author":book.author,
+        "rating": book.author,
+        "is_bestseller": book.is_bestselling
+    })
+
+4- update urls.py
+
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path("", views.index),
+    # path("<int:id>", views.book_detail, name="book-detail")
+    path("<slug:slug>", views.book_detail, name="book-detail")
+]
+
+
+Finished
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

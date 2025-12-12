@@ -1,0 +1,194 @@
+1- get from id 
+
+>>> Book.objects.get(id=3)
+<Book: Harry Potter 1 (5)>
+
+
+2- get from field 
+
+>>> Book.objects.get(title="My Story") 
+<Book: My Story (2)>
+
+Ex:
+
+>>> Book.objects.all()
+<QuerySet [<Book: Lord of the Rings (4)>, <Book: Harry Potter 1 (5)>, <Book: My Story (2)>, <Book: Some random book (1)>]>
+>>> Book.objects.get(rating=5)
+<Book: Harry Potter 1 (5)>
+
+
+3- filter (equal =)
+
+>>> Book.objects.filter(is_bestselling=True)
+<QuerySet [<Book: Lord of the Rings (4)>, <Book: Harry Potter 1 (5)>]>
+
+
+or 
+
+>>> Book.objects.filter(is_bestselling=False) 
+<QuerySet [<Book: My Story (2)>, <Book: Some random book (1)>]>
+
+
+
+4- filter (big or smaller)
+
+>>> Book.objects.filter(rating__lt=3)
+<QuerySet [<Book: My Story (2)>, <Book: Some random book (1)>]>
+
+Note : we use __ user score two times : rating__lt=3
+
+Link to check for the : django filter
+
+https://docs.djangoproject.com/en/6.0/topics/db/queries/
+
+
+5- filter with two parameter : title__contains="My Story",rating__lt=3
+
+>>> Book.objects.get(title__contains="My Story",rating__lt=3) 
+<Book: My Story (2)>
+
+6- Egnore case sensitive : __icontains
+
+>>> Book.objects.get(title__icontains="Story",rating__lt=3) 
+<Book: My Story (2)>
+
+7- or query : import Django. Q
+
+from django.db.models import Q
+>>> Book.objects.filter(Q(rating__lt=3) | Q(is_bestselling=True))
+<QuerySet [<Book: Lord of the Rings (4)>, <Book: Harry Potter 1 (5)>, <Book: My Story (2)>, <Book: Some random book (1)>]>
+
+
+note we use (|) for the or query 
+
+
+Ex: with and (,) comma 
+
+>>> Book.objects.filter(Q(rating__lt=3) | Q(is_bestselling=True), author="vibol")        
+<QuerySet [<Book: Lord of the Rings (4)>]>
+
+
+Note: we use (or) before and 
+
+
+8- scope of the filter 
+
+>>> bestsellers = Book.objects.filter(is_bestselling=True)
+>>> amazing_bestsellers = bestsellers.filter(rating__gt=4)
+>>> print(bestsellers)
+<QuerySet [<Book: Lord of the Rings (4)>, <Book: Harry Potter 1 (5)>]>
+>>> print(amazing_bestsellers)
+<QuerySet [<Book: Harry Potter 1 (5)>]>
+>>> 
+
+មានន័យថាពេលដែលយើងបង្កើត variable to store the query it is not yet go to database and query the data it just the 
+prepare the statement and store in the chatch 
+
+- when we print the variable it will query to the database! 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

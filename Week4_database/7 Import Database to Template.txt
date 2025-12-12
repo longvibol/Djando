@@ -1,0 +1,192 @@
+1- Import database : in the app views.py
+
+from django.shortcuts import render
+from .models import Book
+
+# Create your views here.
+
+def index(request):
+    books = Book.objects.all()
+    return render(request, "book_outlet/index.html",{
+        "books" : books
+    })
+
+explain:
+
++ from .models import Book : យកទិន្នន័យមកប្រើ
+
++ books = Book.objects.all() : query the database 
+
++ return render(request, "book_outlet/index.html",{
+        "books" : books
+    })
+
+-----------------------------------------------------------------------
+
++ interpolate : បង្ហាញទិន្នន័យ ទៅអោយ template  {{}}
+
+2- Create link to each book_detail 
+
+------------------------
+
+{% extends "book_outlet/base.html" %}
+
+{% block title %}
+    {{ title}}
+{% endblock  %}
+
+{% block content %}
+    <h1>{{ title }}</h1>
+    <h1>{{ author }}</h1>
+    <p>The book has a rating of {{ rating }}
+    
+    {% if is_bestseller %}
+        and is a is_bestseller.
+    {%else%}
+        but isn't a is_bestseller.
+    {% endif%}
+    </p>
+
+{% endblock %}
+
+----------------------
+
+
+This is only the template that we will inject the data from database 
+
+in the views.py : where we write our function to return the data to template:
+
+
+def book_detail(request, id):
+    # try:
+    #     book = Book.objects.get(pk=id)
+    # except:
+    #     raise Http404
+    book = get_object_or_404(Book, pk=id)
+    return render(request, "book_outlet/book_detail.html",{
+        "title":book.title,
+        "author":book.author,
+        "rating": book.author,
+        "is_bestseller": book.is_bestselling
+    })
+
+
+--------------------
+
+in the urls.py
+
+-------------------------
+
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path("", views.index),
+    path("<int:id>", views.book_detail, name="book-detail")
+]
+
+
+--------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

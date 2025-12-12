@@ -1,0 +1,28 @@
+1- update 
+
+>>> from book_outlet.models import Book
+>>> harry_potter = Book.objects.all()[0]
+>>> harry_potter.title
+"Harry Potter 1- The Philosopher's Stone"
+>>> lotr = Book.objects.all()[0]
+>>> lotr.title
+"Harry Potter 1- The Philosopher's Stone"
+>>> lotr = Book.objects.all()[1] 
+>>> lotr.title
+'Lord of the Rings'
+>>> harry_potter.author ="J.K. Rowling"
+>>> harry_potter.is_bestselling = True
+>>> harry_potter.save()
+>>> Book.objects.all()[0].author
+'J.K. Rowling'
+
+Ex:
+
+>>> lort = Book.objects.all()[1]
+>>> lort.author ="vibol"
+>>> lort.is_bestselling =True
+>>> lort.save()
+>>> Book.objects.all()[1].author
+'vibol'
+>>> Book.objects.all()[1].is_bestselling
+True

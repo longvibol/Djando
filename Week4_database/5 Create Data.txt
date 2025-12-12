@@ -1,0 +1,5 @@
+>>> Book.objects.create(title="Harry Potter 1", rating=5, author="J.K Rowling", is_bestselling=True)
+
+>>> Book.objects.create(title="My Story", rating=2, author="Max", is_bestselling=False) 
+
+>>>Book.objects.create(title="Some random book", rating=1, author="Max", is_bestselling=False) 
