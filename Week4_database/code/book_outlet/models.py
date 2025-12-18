@@ -10,11 +10,11 @@ class Book(models.Model):
     is_bestselling = models.BooleanField(default=False)
 
     # Harry Potter 1 => harry-potter-1
-    slug = models.SlugField(default="", null=False, db_index=True)
+    slug = models.SlugField(default="",blank=True,null=False, db_index=True)
 
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.title)
-        super().save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     self.slug = slugify(self.title)
+    #     super().save(*args, **kwargs)
 
 
     # get primary key from model

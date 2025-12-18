@@ -1,0 +1,52 @@
+1- Create User login admin
+
+>> python.exe .\manage.py createsuperuser
+
+
+login page: 
+
+http://127.0.0.1:8000/admin/
+
+>> admin
+>> admin 
+
+2- Add our database to the admin 
+
+- in the app add the our database to the admin 
+
+from django.contrib import admin
+
+from .models import Book
+
+# Register your models here.
+
+admin.site.register(Book)
+
+3- customize the input from the admin login page 
+
+ slug = models.SlugField(default="",blank=True, null=False, db_index=True)
+
+ដោយសារតែ  slug វាបង្កើត auto when it save therefore, we can add the new propertry, black=True =អាមិនដាក់បាន
+
+or 
+
+we can disable the slug field in the ui (can not editnable) 
+
+editable=False
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

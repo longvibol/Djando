@@ -1,0 +1,28 @@
+1- update our field 
+
+class BookAdmin(admin.ModelAdmin):
+    prepopulated_fields = {"slug": ("title",)}
+
+2- remove auto save field 
+
+    # def save(self, *args, **kwargs):
+    #     self.slug = slugify(self.title)
+    #     super().save(*args, **kwargs)
+
+Remove all of this line!
+
+-------------------------------------------------------------------------
+
+Whole code:
+
+
+from django.contrib import admin
+
+from .models import Book
+
+# Register your models here.
+
+class BookAdmin(admin.ModelAdmin):
+    prepopulated_fields = {"slug": ("title",)}
+
+admin.site.register(Book, BookAdmin)

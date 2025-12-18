@@ -1,0 +1,74 @@
+1- Create extend class from our model we have 
+
+Example we have Book model then we create the new one 
+
+from django.contrib import admin
+
+from .models import Book
+
+# Register your models here.
+
+class BookAdmin(admin.ModelAdmin):
+    readonly_fields =("slug",)
+
+admin.site.register(Book, BookAdmin)
+
+
+- explain : ModelAdmin in the new class that we extend from Book 
+
+
+2- Create read only 
+
+in the admin:
+- readonly_fields =("slug",)
+
+in the model we remove : editable=False
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
